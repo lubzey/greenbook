@@ -1,0 +1,67 @@
+<nav class="navbar is-white">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="/">
+      <span>
+        <img src="assets/images/logo200.png" height="30">
+      </span>
+      <p class="">
+        GreenLovers
+      </p>
+    </a>
+    <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navbarExampleTransparentExample" class="navbar-menu">
+    <div class="navbar-start">
+
+    </div>
+  </div>
+
+  <div class="navbar-end">
+
+
+    <a class="navbar-item" routerLink="/plants">
+      <span class="icon">
+        <i class="fab fa-pagelines" style="color:#95CA3E;"></i>
+      </span>
+      Plants
+    </a>
+    <a class="navbar-item" routerLink="/uploads">
+      <span class="icon">
+        <i class="fab fa-hubspot" style="color:#95CA3E;"></i>
+      </span>
+      File Uploads
+    </a>
+
+    <!-- User logged in -->
+    <div *ngIf="auth.user | async as user; else login" class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link">
+        <span class="icon">
+          <i class="fas fa-user" style="color:#95CA3E;"></i>
+        </span>
+        Profile
+      </a>
+      <div class="navbar-dropdown is-boxed">
+        <a class="navbar-item" href="/">
+          Settings
+        </a>
+        <a class="navbar-item" (click)="logout()">
+          Logout
+        </a>
+      </div>
+    </div>
+
+    <!-- User NOT logged in -->
+    <ng-template #login>
+      <a class="navbar-item" routerLink="/login">
+        Login
+      </a>
+    </ng-template>
+    <img *ngIf="auth.user | async as user" class="image is-48x48" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'"
+      style="margin-top: 2px">
+  </div>
+</nav>

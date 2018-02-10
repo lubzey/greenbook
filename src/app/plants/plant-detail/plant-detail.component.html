@@ -1,0 +1,22 @@
+<div class="columns">
+  <div class="column">
+    <img src="http://lohitsascience.weebly.com/uploads/2/2/6/0/22607136/622994_orig.jpg" alt="Placeholder image">
+  </div>
+  <div class="column">
+    <h3>{{plant.name}}</h3>
+    <h5>{{plant.latinName}}</h5>
+    <hr>
+    <span class="button is-small is-info" (click)='addHeartToPlant(plant.hearts)'>
+      <i class="fa fa-heart"></i>
+      &nbsp;
+      <span>{{ plant.hearts || 0 }}</span>
+    </span>
+    <span class="button is-small is-danger" (click)='deletePlant(plant?.id)'>Delete</span>
+  </div>
+  <div class="column">
+    <span>Type: {{ plant.type || 0 }}</span>
+  </div>
+  <div class="column">
+    <span>Light: {{ plant.light || 0 }}</span>
+  </div>
+</div>
