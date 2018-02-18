@@ -21,9 +21,6 @@ export class PlantAddComponent {
 
   @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
 
-  @Input()
-  showPlantAdd: boolean;
-
   private types = [
     { value: 'Tree', display: 'Tree' },
     { value: 'Climber', display: 'Climber' },
@@ -34,10 +31,10 @@ export class PlantAddComponent {
   ];
 
   private lights = [
-    { value: 'Full sun', display: 'Full sun' },
-    { value: 'Semi-shade', display: 'Semi-shade' },
-    { value: 'Full shade', display: 'Full shade' },
-    { value: 'Filtered light', display: 'Filtered light' }
+    { value: 'Full sun', icon: 'full-sun' },
+    { value: 'Semi-shade', icon: 'semi-shade' },
+    { value: 'Full shade', icon: 'full-shade' },
+    { value: 'Filtered light', icon: 'filtered-light' }
   ];
 
   formErrors: FormErrors = {
@@ -57,10 +54,10 @@ export class PlantAddComponent {
       'minlength': 'Latin name must be at least 5 characters long.'
     },
     'type': {
-      'required': 'Name is required.'
+      'required': 'Type is required.'
     },
     'light': {
-      'required': 'Name is required.'
+      'required': 'Light is required.'
     }
   };
 
@@ -143,5 +140,37 @@ export class PlantAddComponent {
 
   hide() {
     this.onHide.emit();
+  }
+
+
+
+
+
+
+
+  value: string[] = [];
+  focused: string;
+
+
+
+
+  writeValue(value) {
+    this.value = value;
+  }
+
+  updateLight(topping: string) {
+    if (this.value.includes(topping)) {
+      this.value = this.value.filter((x: string) => topping !== x);
+    } else {
+      this.value = this.value.concat([topping]);
+    }
+  }
+
+  onBlur(value: string) {
+    this.focused = '';
+  }
+
+  onFocus(value: string) {
+    this.focused = value;
   }
 }

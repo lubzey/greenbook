@@ -1,55 +1,86 @@
-<button type="hide" (click)="hide()" class="button is-danger">
-  <span class="icon is-small">
-    <i class="fas fa-minus-square"></i>
-  </span>
-  &nbsp; Back to plants
-</button>
-
 <h2>New plant</h2>
 <form [formGroup]="newPlantForm" (ngSubmit)="createPlant()" novalidate>
   <div class="form-group">
-    <label  class="label">Common name
+    <label class="label">Common name
       <input class="form-control input" formControlName="name" required>
     </label>
-    <label  class="label">Latin name
+    <label class="label">Latin name
       <input class="form-control input" formControlName="latinName" required>
     </label>
 
     <label class="label">Type</label>
     <div class="form-group" class="select">
-      <select name="type" formControlName="type" required>
+      <select formControlName="type" required>
         <option value="" disabled selected hidden>Select</option>
         <option *ngFor="let type of types" [value]="type.value">
           {{type.display}}
         </option>
       </select>
     </div>
-    <br><br>
+    <br>
+    <br>
 
     <div class="form-group select is-multiple">
       <label class="label">Light</label>
-      <select multiple name="lights" formControlName="light" required>
+      <select multiple formControlName="light" required>
         <option *ngFor="let light of lights" [value]="light.value">
-          {{light.display}}
-        </option>
+          {{light.value}}
+        </option>        
       </select>
+
+      <!-- <label
+        *ngFor="let light of lights"
+        class="plant-light label column"
+        [class.plant-light--active]="value.includes(light)"
+        [class.plant-light--focused]="focused === light">
+        <input
+          formControlName="light"
+          type="checkbox"
+          [attr.name]="light.name"
+          [value]="light.value"
+          (change)="updateLight(light)"
+          [checked]="value.includes(light)">
+        <span class="plant-light__icon plant-light__icon--{{ light.icon }}"></span>
+        {{ light.value | titlecase }}
+      </label>
+      <label class="column">
+
+      </label> -->
+
+
+
+
+
     </div>
   </div>
+
+
   <br>
 
-  <div style="margin-bottom: 1em">
-    <button type="reset" (click)="reset()" [disabled]="newPlantForm.pristine" class="button is-info">
-      <span class="icon is-small">
-        <i class="fas fa-undo-alt"></i>
-      </span>
-      &nbsp; Reset
-    </button>
+
+
+  <div style="margin-bottom: 1em" class="columns">
+    <div class="column is-one-fifth">
+      <button type="reset" (click)="reset()" [disabled]="newPlantForm.pristine" class="button is-info">
+        <span class="icon is-small">
+          <i class="fas fa-undo-alt"></i>
+        </span>
+        &nbsp; Reset
+      </button>
+    </div>
+
     &nbsp;
-    <button type="submit" [disabled]="newPlantForm.pristine || !newPlantForm.valid" class="button is-success">
-      <span class="icon is-small">
-        <i class="fas fa-check"></i>
-      </span>
-      &nbsp; Add
-    </button>
+    <div class="column is-one-fifth">
+      <button type="submit" [disabled]="newPlantForm.pristine || !newPlantForm.valid" class="button is-success">
+        <span class="icon is-small">
+          <i class="fas fa-check"></i>
+        </span>
+        &nbsp; Add
+      </button>
+    </div>
+
+    <div class="column">
+
+    </div>
   </div>
 </form>

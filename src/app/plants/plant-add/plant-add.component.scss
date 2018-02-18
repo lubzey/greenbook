@@ -1,3 +1,75 @@
 .is-success {
     background-color: #95CA3E !important;
 }
+button {
+    width: 100%;
+}
+
+.plant-lights {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .plant-light {
+    background: rgba(0, 0, 0, 0.00);
+    border-radius: 3px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.7);
+    padding-left: 40px;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    user-select: none;
+  
+    input {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+  
+    &--active {
+      background: #95CA3E;
+      color: #fff;
+      font-weight: 500;
+    }
+  
+    &--extra {
+      .plant-light__extra {
+        transform: rotate(90deg) translate3d(0, 0, 0);
+      }
+    }
+  
+
+  
+    &__icon {
+      background: rgba(0, 0, 0, 0.00) no-repeat center center;
+      background-size: 30px;
+      width: 40px;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      &--full-sun {
+        background-image: url(/assets/toppings/full-sun.png);
+      }
+      &--semi-shade {
+        background-image: url(/assets/toppings/semi-shade.png);
+      }
+      &--full-shade {
+        background-image: url(/assets/toppings/full-shade.png);
+      }
+      &--filtered-light {
+        background-image: url(/assets/toppings/filtered-light.png);
+      }
+    }
+  }
+  

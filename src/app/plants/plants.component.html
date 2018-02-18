@@ -1,9 +1,26 @@
-<button *ngIf="!showPlantAdd" (click)="toggleNewPlant()" class="button is-success">
-  <span class="icon is-small">
-    <i class="fas fa-plus-square"></i>
-  </span>
-  &nbsp; Add a new plant
-</button>
+<div class="columns">
+  <div class="column is-one-fifth">
+    <button *ngIf="!showPlantAdd" (click)="toggleNewPlant()" class="button is-success toggle">
+      <span class="icon is-small">
+        <i class="fas fa-plus-square"></i>
+      </span>
+      &nbsp; Add a new plant
+    </button>
+
+    <button *ngIf="showPlantAdd" (click)="toggleNewPlant()" class="button is-danger toggle">
+      <span class="icon is-small">
+        <i class="fas fa-angle-double-left"></i>
+      </span>
+      &nbsp; &nbsp; Back to Plants
+    </button>
+  </div>
+  <div class="column is-one-fifth">
+
+  </div>
+  <div class="column">
+
+  </div>
+</div>
 
 <plant-add *ngIf="showPlantAdd" (showPlantAdd)="showPlantAdd" (onHide)="toggleNewPlant()">
 </plant-add>
