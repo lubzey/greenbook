@@ -9,11 +9,16 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'plant-add',
   templateUrl: './plant-add.component.html',
-  styleUrls: ['./plant-add.component.scss'],
+  styleUrls: ['./plant-add.component.scss']
 })
 export class PlantAddComponent {
   newPlant: Plant;
   newPlantForm: FormGroup;
+
+  @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
+
+  @Input()
+  showPlantAdd: boolean;
 
   private types = [
     { value: 'Tree', display: 'Tree' },
@@ -54,11 +59,9 @@ export class PlantAddComponent {
 
   createPlant() {
     this.newPlant = this.newPlantForm.value;
-
     console.log(this.newPlant);
 
     this.plantService.create(this.newPlant);
-
     this.reset();
   }
 
@@ -70,5 +73,9 @@ export class PlantAddComponent {
       light: '',
       hearts: 0
     }
+  }
+
+  hide() {
+    this.onHide.emit();
   }
 }

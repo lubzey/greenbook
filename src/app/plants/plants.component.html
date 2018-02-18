@@ -1,4 +1,11 @@
-<plant-add>
+<button *ngIf="!showPlantAdd" (click)="toggleNewPlant()" class="button is-success">
+  <span class="icon is-small">
+  <i class="fas fa-plus-square"></i>
+  </span>
+  &nbsp; Add Plant
+</button>
+
+<plant-add *ngIf="showPlantAdd" (showPlantAdd)="showPlantAdd" (onHide)="toggleNewPlant()">
 </plant-add>
 <hr>
 

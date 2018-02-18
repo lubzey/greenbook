@@ -8,11 +8,12 @@ import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'plants',
-  templateUrl: './plants.component.html'
+  templateUrl: './plants.component.html',
+  styleUrls: ['./plants.component.scss']  
 })
 export class PlantsComponent implements OnInit {
   plants: Observable<Plant[]>;
-  newPlant: Plant;
+  showPlantAdd: boolean;
 
   constructor(private plantService: PlantService) {    
   }
@@ -20,5 +21,11 @@ export class PlantsComponent implements OnInit {
   ngOnInit() {
     // this.plants = this.plantService.getData() only loads static data 
     this.plants = this.plantService.getSnapshot();
+    this.showPlantAdd = false;
+  }
+
+  toggleNewPlant() {
+    this.showPlantAdd = !this.showPlantAdd;
+    console.log(this.showPlantAdd);
   }
 }
