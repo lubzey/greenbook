@@ -1,0 +1,72 @@
+<!-- <p>New plant</p>
+
+<div>
+  <input required [(ngModel)]="newPlant.name" placeholder="Common name" class="input"> -->
+
+<!-- <div *ngIf="newPlant.name.touched && !newPlant.name.valid">Plant name is required</div> -->
+
+<!-- <input [(ngModel)]="newPlant.latinName" placeholder="Latin name" class="input">
+
+  <div class="select">
+    <select name="type" [(ngModel)]="newPlant.type">
+      <option value="" disabled selected hidden>Type</option>
+      <option *ngFor="let type of types" [value]="type.value">
+        {{type.display}}
+      </option>
+    </select>
+  </div>
+</div>
+
+<div class="select is-multiple">
+  <label>Light</label>
+  <select multiple name="lights" [(ngModel)]="newPlant.light">
+    <option *ngFor="let light of lights" [value]="light.value">
+      {{light.display}}
+    </option>
+  </select>
+</div>
+
+<div>
+  <button class="button is-success" (click)="createPlant()" [disabled]="newPlant.name?.length < 2 || newPlant.name?.length > 200">
+    Add Plant
+  </button>
+</div> -->
+
+
+
+<p>New plant</p>
+<form [formGroup]="newPlantForm" (ngSubmit)="createPlant()" novalidate>
+
+  <div style="margin-bottom: 1em">
+    <button type="submit" [disabled]="newPlantForm.pristine" class="button is-success">Add</button> &nbsp;
+    <button type="reset" (click)="reset()" [disabled]="newPlantForm.pristine" class="button is-danger">Reset</button>
+  </div>
+
+  <div class="form-group">
+    <label class="">Common name
+      <input class="form-control input" formControlName="name">
+    </label>
+    <label class="">Latin name
+      <input class="form-control input" formControlName="latinName">
+    </label>
+
+    <label>Type</label>
+    <div class="form-group" class="select">
+      <select name="type" formControlName="type">
+        <option value="" disabled selected hidden>Select</option>
+        <option *ngFor="let type of types" [value]="type.value">
+          {{type.display}}
+        </option>
+      </select>
+    </div>
+    <br>
+    <div class="form-group select is-multiple">
+      <label>Light</label>
+      <select multiple name="lights" formControlName="light">
+        <option *ngFor="let light of lights" [value]="light.value">
+          {{light.display}}
+        </option>
+      </select>
+    </div>
+  </div>
+</form>

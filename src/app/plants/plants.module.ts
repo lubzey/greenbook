@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
 import { PlantService } from './plant.service';
 
-import { PlantsListComponent } from './plants-list/plants-list.component';
+import { PlantsComponent } from './plants.component';
+import { PlantAddComponent } from './plant-add/plant-add.component';
 import { PlantDetailComponent } from './plant-detail/plant-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -14,12 +15,13 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    ReactiveFormsModule,
     SharedModule,
     AngularFirestoreModule.enablePersistence(),
   ],
   declarations: [
-    PlantsListComponent,
+    PlantsComponent,
+    PlantAddComponent,
     PlantDetailComponent,
   ],
   providers: [PlantService],

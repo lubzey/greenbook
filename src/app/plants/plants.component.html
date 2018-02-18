@@ -1,0 +1,10 @@
+<plant-add>
+</plant-add>
+<hr>
+
+<h1>Plants</h1>
+
+<!-- implement basic and advanced view -->
+<div *ngFor="let plant of plants | async">
+  <plant-detail [plant]="plant"></plant-detail>
+</div>
