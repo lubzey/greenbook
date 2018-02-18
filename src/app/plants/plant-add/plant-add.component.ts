@@ -1,10 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgClass } from '@angular/common';
 
 import { PlantService } from '../plant.service';
+import { NotifyService } from '../../core/notify.service';
 
 import { Plant } from '../plant-model';
 
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+type PlantFields = 'name' | 'latinName' | 'type' | 'light';
+type FormErrors = { [u in PlantFields]: string };
 
 @Component({
   selector: 'plant-add',
@@ -36,7 +40,33 @@ export class PlantAddComponent {
     { value: 'Filtered light', display: 'Filtered light' }
   ];
 
-  constructor(private fb: FormBuilder, private plantService: PlantService) {
+  formErrors: FormErrors = {
+    'name': '',
+    'latinName': '',
+    'type': '',
+    'light': ''
+  };
+
+  validationMessages = {
+    'name': {
+      'required': 'Name is required.',
+      'minlength': 'Name must be at least 2 characters long.'
+    },
+    'latinName': {
+      'required': 'Latin name is required.',
+      'minlength': 'Latin name must be at least 5 characters long.'
+    },
+    'type': {
+      'required': 'Name is required.'
+    },
+    'light': {
+      'required': 'Name is required.'
+    }
+  };
+
+  constructor(private fb: FormBuilder,
+    private plantService: PlantService,
+    private notify: NotifyService) {
     this.createForm();
 
     this.newPlant = {
@@ -49,18 +79,56 @@ export class PlantAddComponent {
 
   createForm() {
     this.newPlantForm = this.fb.group({
-      name: '',
-      latinName: '',
-      type: '',
-      light: '',
-      hearts: 0
+      'name': ['', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20)
+      ]],
+      'latinName': ['', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(100)
+      ]],
+      'type': ['', [
+        Validators.required
+      ]],
+      'light': ['', [
+        Validators.required
+      ]]
     });
+
+    this.newPlantForm.valueChanges.subscribe((data) => this.onValueChanged(data));
+    this.onValueChanged(); // reset validation messages
+  }
+
+  onValueChanged(data?: any) {
+    if (!this.newPlantForm) { return; }
+    const form = this.newPlantForm;
+    for (const field in this.formErrors) {
+      if (Object.prototype.hasOwnProperty.call(this.formErrors, field) && (field === 'name' || field === 'latinName' || field === 'type' || field === 'light')) {
+        // clear previous error message (if any)
+        this.formErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          if (control.errors) {
+            for (const key in control.errors) {
+              if (Object.prototype.hasOwnProperty.call(control.errors, key)) {
+                this.formErrors[field] += `${(messages as { [key: string]: string })[key]} `;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
   createPlant() {
+    console.log(this.newPlantForm.valid);
     this.newPlant = this.newPlantForm.value;
     this.plantService.create(this.newPlant);
     this.hide();
+    this.notify.update(this.newPlant.name + ' added successfully!', 'success');
   }
 
   reset() {

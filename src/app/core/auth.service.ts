@@ -25,7 +25,6 @@ export class AuthService {
               private afs: AngularFirestore,
               private router: Router,
               private notify: NotifyService) {
-
     this.user = this.afAuth.authState
       .switchMap((user) => {
         if (user) {
@@ -49,7 +48,7 @@ export class AuthService {
   }
 
   facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider();
+    const provider = new firebase.auth.FacebookAuthProvider();    
     return this.oAuthLogin(provider);
   }
 
@@ -134,6 +133,6 @@ export class AuthService {
       displayName: user.displayName || 'nameless user',
       photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
     };
-    return userRef.set(data);
+    return userRef.set(data, { merge: true });
   }
 }

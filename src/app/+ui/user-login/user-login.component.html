@@ -3,30 +3,32 @@
   <h3>Social Login</h3>
 
     <button (click)="signInWithGoogle()" class="button btn-social btn-google">
-      <i class="fab fa-google fa-lg"></i> Connect Google
+      <i class="fab fa-google fa-lg"></i>
+      &nbsp; Connect Google
     </button>
 
-    <button (click)="signInWithGithub()" class="button btn-social btn-github" disabled>
+    <!-- <button (click)="signInWithGithub()" class="button btn-social btn-github" disabled>
       <i class="fab fa-github fa-lg"></i> Connect GitHub
+    </button> -->
+
+    <button (click)="signInWithFacebook()" class="button btn-social btn-facebook">
+      <i class="fab fa-facebook fa-lg"></i>
+      &nbsp; Connect Facebook
     </button>
 
-    <button (click)="signInWithFacebook()" class="button  btn-social btn-facebook" disabled>
-      <i class="fab fa-facebook fa-lg"></i> Connect Facebook
-    </button>
-
-    <button (click)="signInWithTwitter()" class="button  btn-social btn-twitter" disabled>
+    <!-- <button (click)="signInWithTwitter()" class="button  btn-social btn-twitter" disabled>
       <i class="fab fa-twitter fa-lg"></i> Connect Twitter
-    </button>
+    </button> -->
 
     <hr>
 
-    <h3>Anonymous Login</h3>
+    <!-- <h3>Anonymous Login</h3>
 
       <button (click)="signInAnonymously()" class="button button-info">
         <i class="fas fa-user-secret fa-lg"></i> Connect Anonymously
       </button>
 
-    <hr>
+    <hr> -->
 
     <user-form></user-form>
 
