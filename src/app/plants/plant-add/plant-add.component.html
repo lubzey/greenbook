@@ -2,20 +2,20 @@
   <span class="icon is-small">
     <i class="fas fa-minus-square"></i>
   </span>
-  &nbsp; Hide form
+  &nbsp; Back to plants
 </button>
 
 <h2>New plant</h2>
 <form [formGroup]="newPlantForm" (ngSubmit)="createPlant()" novalidate>
   <div class="form-group">
-    <label class="">Common name
+    <label  class="label">Common name
       <input class="form-control input" formControlName="name">
     </label>
-    <label class="">Latin name
+    <label  class="label">Latin name
       <input class="form-control input" formControlName="latinName">
     </label>
 
-    <label>Type</label>
+    <label class="label">Type</label>
     <div class="form-group" class="select">
       <select name="type" formControlName="type">
         <option value="" disabled selected hidden>Select</option>
@@ -24,9 +24,10 @@
         </option>
       </select>
     </div>
-    <br>
+    <br><br>
+
     <div class="form-group select is-multiple">
-      <label>Light</label>
+      <label class="label">Light</label>
       <select multiple name="lights" formControlName="light">
         <option *ngFor="let light of lights" [value]="light.value">
           {{light.display}}

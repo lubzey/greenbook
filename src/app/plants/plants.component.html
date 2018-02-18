@@ -1,17 +1,19 @@
 <button *ngIf="!showPlantAdd" (click)="toggleNewPlant()" class="button is-success">
   <span class="icon is-small">
-  <i class="fas fa-plus-square"></i>
+    <i class="fas fa-plus-square"></i>
   </span>
-  &nbsp; Add Plant
+  &nbsp; Add a new plant
 </button>
 
 <plant-add *ngIf="showPlantAdd" (showPlantAdd)="showPlantAdd" (onHide)="toggleNewPlant()">
 </plant-add>
 <hr>
 
-<h1>Plants</h1>
+<div *ngIf="!showPlantAdd">
+  <h1>Plants</h1>
 
-<!-- implement basic and advanced view -->
-<div *ngFor="let plant of plants | async">
-  <plant-detail [plant]="plant"></plant-detail>
+  <!-- implement basic and advanced view -->
+  <div *ngFor="let plant of plants | async">
+    <plant-detail [plant]="plant"></plant-detail>
+  </div>
 </div>

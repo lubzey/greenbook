@@ -59,10 +59,8 @@ export class PlantAddComponent {
 
   createPlant() {
     this.newPlant = this.newPlantForm.value;
-    console.log(this.newPlant);
-
     this.plantService.create(this.newPlant);
-    this.reset();
+    this.hide();
   }
 
   reset() {
