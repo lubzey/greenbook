@@ -61,7 +61,7 @@
         Login
       </a>
     </ng-template>
-    <img *ngIf="auth.user | async as user" class="image is-48x48" [src]="user.photoURL || 'https://api.adorable.io/avatars/109/fire.png'"
+    <img *ngIf="auth.user | async as user" class="image is-48x48" [src]="user.photoURL || '/assets/images/doge.png'"
       style="margin-top: 2px">
   </div>
 </nav>
