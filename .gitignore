@@ -44,3 +44,4 @@ Thumbs.db
 
 # Firebaseconfig
 /src/environments/firebase.config.ts
+package-lock.json
