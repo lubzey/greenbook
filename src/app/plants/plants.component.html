@@ -1,13 +1,13 @@
 <div class="columns">
-  <div class="column is-one-fifth">
-    <button *ngIf="!showPlantAdd" (click)="toggleNewPlant()" class="button is-success toggle">
+  <div class="column is-one-quarter">
+    <button *ngIf="!showPlantAdd" (click)="toggleNewPlant()" class="button is-light toggle">
       <span class="icon is-small">
         <i class="fas fa-plus-square"></i>
       </span>
       &nbsp; Add a new plant
     </button>
 
-    <button *ngIf="showPlantAdd" (click)="toggleNewPlant()" class="button is-danger toggle">
+    <button *ngIf="showPlantAdd" (click)="toggleNewPlant()" class="button is-light toggle">
       <span class="icon is-small">
         <i class="fas fa-angle-double-left"></i>
       </span>

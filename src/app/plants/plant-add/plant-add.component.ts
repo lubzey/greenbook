@@ -7,7 +7,7 @@ import { NotifyService } from '../../core/notify.service';
 
 import { Plant } from '../plant-model';
 
-type PlantFields = 'name' | 'latinName' | 'type' | 'light';
+type PlantFields = 'name' | 'latinName' | 'layer' | 'light';
 type FormErrors = { [u in PlantFields]: string };
 
 @Component({
@@ -21,13 +21,14 @@ export class PlantAddComponent {
 
   @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
 
-  private types = [
+  private layers = [
     { value: 'Tree', display: 'Tree' },
-    { value: 'Climber', display: 'Climber' },
-    { value: 'Shrub', display: 'Shrub' },
+    { value: 'Shrub', display: 'Shrub' },    
+    { value: 'Vine', display: 'Vine' },
     { value: 'Herb', display: 'Herb' },
     { value: 'Ground', display: 'Ground' },
-    { value: 'Underground', display: 'Underground' }
+    { value: 'Underground', display: 'Underground' },
+    { value: 'Aquatic', display: 'Aquatic' }
   ];
 
   private lights = [
@@ -40,7 +41,7 @@ export class PlantAddComponent {
   formErrors: FormErrors = {
     'name': '',
     'latinName': '',
-    'type': '',
+    'layer': '',
     'light': ''
   };
 
@@ -53,8 +54,8 @@ export class PlantAddComponent {
       'required': 'Latin name is required.',
       'minlength': 'Latin name must be at least 5 characters long.'
     },
-    'type': {
-      'required': 'Type is required.'
+    'layer': {
+      'required': 'Layer is required.'
     },
     'light': {
       'required': 'Light is required.'
@@ -70,7 +71,7 @@ export class PlantAddComponent {
       name: '',
       latinName: '',
       hearts: 0,
-      type: ''
+      layer: ''
     }
   }
 
@@ -86,7 +87,7 @@ export class PlantAddComponent {
         Validators.minLength(5),
         Validators.maxLength(100)
       ]],
-      'type': ['', [
+      'layer': ['', [
         Validators.required
       ]],
       'light': ['', [
@@ -102,7 +103,7 @@ export class PlantAddComponent {
     if (!this.newPlantForm) { return; }
     const form = this.newPlantForm;
     for (const field in this.formErrors) {
-      if (Object.prototype.hasOwnProperty.call(this.formErrors, field) && (field === 'name' || field === 'latinName' || field === 'type' || field === 'light')) {
+      if (Object.prototype.hasOwnProperty.call(this.formErrors, field) && (field === 'name' || field === 'latinName' || field === 'layer' || field === 'light')) {
         // clear previous error message (if any)
         this.formErrors[field] = '';
         const control = form.get(field);
@@ -132,7 +133,7 @@ export class PlantAddComponent {
     this.newPlant = {
       name: '',
       latinName: '',
-      type: '',
+      layer: '',
       light: '',
       hearts: 0
     }

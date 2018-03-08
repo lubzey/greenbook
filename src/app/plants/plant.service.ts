@@ -39,7 +39,7 @@ export class PlantService {
           latinName: data.latinName, 
           hearts: data.hearts, 
           time: data.time,
-          type: data.type,
+          layer: data.layer,
           height: data.height,
           width: data.width,
           minHardinessZone: data.minHardinessZone,
@@ -61,7 +61,7 @@ export class PlantService {
       hearts: 0,
       time: new Date().getTime(),
 
-      type: newPlant.type,
+      layer: newPlant.layer,
       height: 10,
       width: 5,
       minHardinessZone: 4,

@@ -5,7 +5,7 @@ export interface Plant {
   id?: string;
   time?: number;
 
-  type: string;
+  layer: string;
   height?: number;
   width?: number;
   minHardinessZone?: number;

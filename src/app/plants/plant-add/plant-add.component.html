@@ -8,12 +8,12 @@
       <input class="form-control input" formControlName="latinName" required>
     </label>
 
-    <label class="label">Type</label>
+    <label class="label">Layer</label>
     <div class="form-group" class="select">
-      <select formControlName="type" required>
+      <select formControlName="layer" required>
         <option value="" disabled selected hidden>Select</option>
-        <option *ngFor="let type of types" [value]="type.value">
-          {{type.display}}
+        <option *ngFor="let layer of layers" [value]="layer.value">
+          {{layer.display}}
         </option>
       </select>
     </div>
@@ -35,7 +35,7 @@
         [class.plant-light--focused]="focused === light">
         <input
           formControlName="light"
-          type="checkbox"
+          layer="checkbox"
           [attr.name]="light.name"
           [value]="light.value"
           (change)="updateLight(light)"
@@ -61,7 +61,7 @@
 
   <div style="margin-bottom: 1em" class="columns">
     <div class="column is-one-fifth">
-      <button type="reset" (click)="reset()" [disabled]="newPlantForm.pristine" class="button is-info">
+      <button layer="reset" (click)="reset()" [disabled]="newPlantForm.pristine" class="button is-info">
         <span class="icon is-small">
           <i class="fas fa-undo-alt"></i>
         </span>
@@ -71,7 +71,7 @@
 
     &nbsp;
     <div class="column is-one-fifth">
-      <button type="submit" [disabled]="newPlantForm.pristine || !newPlantForm.valid" class="button is-success">
+      <button layer="submit" [disabled]="newPlantForm.pristine || !newPlantForm.valid" class="button is-success">
         <span class="icon is-small">
           <i class="fas fa-check"></i>
         </span>
