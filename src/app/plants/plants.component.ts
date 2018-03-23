@@ -26,6 +26,5 @@ export class PlantsComponent implements OnInit {
 
   toggleNewPlant() {
     this.showPlantAdd = !this.showPlantAdd;
-    console.log(this.showPlantAdd);
   }
 }

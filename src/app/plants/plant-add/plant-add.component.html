@@ -20,32 +20,29 @@
     <br>
     <br>
 
-    <div class="form-group select is-multiple">
-      <label class="label">Light</label>
-      <select multiple formControlName="light" required>
+    <div>
+      <label class="label column">Light</label>
+      <!-- <select multiple formControlName="light" required>
         <option *ngFor="let light of lights" [value]="light.value">
           {{light.value}}
-        </option>        
-      </select>
-
-      <!-- <label
-        *ngFor="let light of lights"
-        class="plant-light label column"
-        [class.plant-light--active]="value.includes(light)"
-        [class.plant-light--focused]="focused === light">
-        <input
-          formControlName="light"
-          layer="checkbox"
-          [attr.name]="light.name"
-          [value]="light.value"
-          (change)="updateLight(light)"
-          [checked]="value.includes(light)">
-        <span class="plant-light__icon plant-light__icon--{{ light.icon }}"></span>
-        {{ light.value | titlecase }}
-      </label>
-      <label class="column">
-
-      </label> -->
+        </option>
+      </select> -->
+      <div class="form-group">
+        <label *ngFor="let light of lights"
+          class="plant-light label column"
+          [class.plant-light--active]="selectedLights.includes(light)">
+          
+          <input formControlName="light"
+            [attr.name]="light.name"  
+            type="checkbox"            
+            [value]="light.value"
+            (change)="updateLight(light)"
+            [checked]="selectedLights.includes(light)">
+            
+          <span class="plant-light__icon plant-light__icon--{{ light.icon }}"></span>
+          {{ light.value | titlecase }}
+        </label>
+      </div>
 
 
 

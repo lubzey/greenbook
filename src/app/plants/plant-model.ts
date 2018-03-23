@@ -11,5 +11,5 @@ export interface Plant {
   minHardinessZone?: number;
   maxHardinessZone?: number;
   edible?: boolean;
-  light?: string;
+  light?: string[];
 }

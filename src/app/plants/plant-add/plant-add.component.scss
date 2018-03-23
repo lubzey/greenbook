@@ -6,10 +6,6 @@ button {
 }
 
 .plant-lights {
-    margin: 10px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
   }
   
   .plant-light {
@@ -36,9 +32,9 @@ button {
 
   
     &--active {
-      background: #95CA3E;
-      color: #fff;
-      font-weight: 500;
+      background: #DBEBBC;
+      color: #000000;
+      font-weight: 700;
     }
   
     &--extra {
@@ -59,16 +55,16 @@ button {
       left: 0;
       bottom: 0;
       &--full-sun {
-        background-image: url(/assets/toppings/full-sun.png);
+        background-image: url(/assets/lights/full-sun.png);
       }
       &--semi-shade {
-        background-image: url(/assets/toppings/semi-shade.png);
+        background-image: url(/assets/lights/semi-shade.png);
       }
       &--full-shade {
-        background-image: url(/assets/toppings/full-shade.png);
+        background-image: url(/assets/lights/full-shade.png);
       }
       &--filtered-light {
-        background-image: url(/assets/toppings/filtered-light.png);
+        background-image: url(/assets/lights/filtered-light.png);
       }
     }
   }

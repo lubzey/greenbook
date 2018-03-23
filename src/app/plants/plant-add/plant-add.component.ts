@@ -18,6 +18,7 @@ type FormErrors = { [u in PlantFields]: string };
 export class PlantAddComponent {
   newPlant: Plant;
   newPlantForm: FormGroup;
+  selectedLights: string[] = [];
 
   @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
 
@@ -39,10 +40,10 @@ export class PlantAddComponent {
   ];
 
   formErrors: FormErrors = {
-    'name': '',
-    'latinName': '',
-    'layer': '',
-    'light': ''
+    'name': 'Name is required',
+    'latinName': 'L is required',
+    'layer': 'Layer',
+    'light': 'Light'
   };
 
   validationMessages = {
@@ -71,28 +72,27 @@ export class PlantAddComponent {
       name: '',
       latinName: '',
       hearts: 0,
-      layer: ''
+      layer: '',
+      light: this.selectedLights
     }
   }
 
   createForm() {
     this.newPlantForm = this.fb.group({
-      'name': ['', [
+      name: ['', [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(20)
       ]],
-      'latinName': ['', [
+      latinName: ['', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100)
       ]],
-      'layer': ['', [
+      layer: ['', [
         Validators.required
       ]],
-      'light': ['', [
-        Validators.required
-      ]]
+      light: [[]]
     });
 
     this.newPlantForm.valueChanges.subscribe((data) => this.onValueChanged(data));
@@ -122,6 +122,7 @@ export class PlantAddComponent {
   }
 
   createPlant() {
+    console.log(this.newPlantForm.value);
     console.log(this.newPlantForm.valid);
     this.newPlant = this.newPlantForm.value;
     this.plantService.create(this.newPlant);
@@ -130,11 +131,12 @@ export class PlantAddComponent {
   }
 
   reset() {
+    this.selectedLights = [];
+
     this.newPlant = {
       name: '',
       latinName: '',
       layer: '',
-      light: '',
       hearts: 0
     }
   }
@@ -144,34 +146,23 @@ export class PlantAddComponent {
   }
 
 
-
-
-
-
-
-  value: string[] = [];
   focused: string;
 
+  private onTouch: Function;
 
 
 
-  writeValue(value) {
-    this.value = value;
-  }
 
-  updateLight(topping: string) {
-    if (this.value.includes(topping)) {
-      this.value = this.value.filter((x: string) => topping !== x);
+
+
+  updateLight(light: string) {
+    if (this.selectedLights.includes(light)) {
+      this.selectedLights = this.selectedLights.filter((x: string) => light !== x);
     } else {
-      this.value = this.value.concat([topping]);
+      this.selectedLights = this.selectedLights.concat(light);
     }
-  }
-
-  onBlur(value: string) {
-    this.focused = '';
-  }
-
-  onFocus(value: string) {
-    this.focused = value;
+    
+    this.newPlant.light = this.selectedLights;
+    console.log(this.selectedLights);
   }
 }
