@@ -1,3 +1,6 @@
+.plant-lights {
+}
+
 .plant-light {
   background: rgba(0, 0, 0, 0.00);
   border-radius: 3px;
@@ -8,6 +11,8 @@
   overflow: hidden;
   position: relative;
   user-select: none;
+  display: inline;
+  margin-right: 2px;
 
   input {
     border: 0;

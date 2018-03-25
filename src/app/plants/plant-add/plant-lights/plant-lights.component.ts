@@ -12,7 +12,7 @@ const PLANT_LIGHTS_ACCESSOR = {
     providers: [PLANT_LIGHTS_ACCESSOR],
     styleUrls: ['plant-lights.component.scss'],
     template: `
-    <div class="plant-lights">
+    <span class="plant-lights">
       <label
         *ngFor="let light of lights"
         class="plant-light label column"
@@ -30,7 +30,7 @@ const PLANT_LIGHTS_ACCESSOR = {
         <span class="plant-light__icon plant-light__icon--{{ lightIcon(light) }}"></span>
         {{ light | titlecase }}
       </label>
-    </div>
+    </span>
   `
 })
 export class PlantLightsComponent implements ControlValueAccessor {
