@@ -17,14 +17,12 @@ const PLANT_LIGHTS_ACCESSOR = {
         *ngFor="let light of lights"
         class="plant-light label column"
         [class.plant-light--active]="value.includes(light)">
-    
         <input           
           type="checkbox"
           [attr.name]="light.name"
           [value]="light"
           (blur)="onBlur(light)"
           (change)="updateLight(light)"
-          (focus)="onFocus(light)"
           [checked]="value.includes(light)">
       
         <span class="plant-light__icon plant-light__icon--{{ lightIcon(light) }}"></span>
@@ -44,7 +42,6 @@ export class PlantLightsComponent implements ControlValueAccessor {
     ];
 
     value: string[] = [];
-    focused: string;
 
     private onTouch: Function;
     private onModelChange: Function;
@@ -73,14 +70,5 @@ export class PlantLightsComponent implements ControlValueAccessor {
         }
         this.onModelChange(this.value);
         console.log(this.value);
-    }
-
-    onBlur(value: string) {
-        this.focused = '';
-    }
-
-    onFocus(value: string) {
-        this.focused = value;
-        this.onTouch();
     }
 }
