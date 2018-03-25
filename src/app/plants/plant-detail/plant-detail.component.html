@@ -17,6 +17,6 @@
     <span>Layer: {{ plant.layer || 0 }}</span>
   </div>
   <div class="column">
-    <span>Light: {{ plant.light || 0 }}</span>
+    <div *ngIf="plant.light[0] != null">Light: {{ plant.light || 0 }}</div>
   </div>
 </div>
