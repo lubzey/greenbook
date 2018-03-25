@@ -18,7 +18,6 @@ type FormErrors = { [u in PlantFields]: string };
 export class PlantAddComponent {
   newPlant: Plant;
   newPlantForm: FormGroup;
-  selectedLights: string[] = [];
 
   @Output() onHide: EventEmitter<any> = new EventEmitter<any>();
 
@@ -30,13 +29,6 @@ export class PlantAddComponent {
     { value: 'Ground', display: 'Ground' },
     { value: 'Underground', display: 'Underground' },
     { value: 'Aquatic', display: 'Aquatic' }
-  ];
-
-  private lights = [
-    { value: 'Full sun', icon: 'full-sun' },
-    { value: 'Semi-shade', icon: 'semi-shade' },
-    { value: 'Full shade', icon: 'full-shade' },
-    { value: 'Filtered light', icon: 'filtered-light' }
   ];
 
   formErrors: FormErrors = {
@@ -73,7 +65,7 @@ export class PlantAddComponent {
       latinName: '',
       hearts: 0,
       layer: '',
-      light: this.selectedLights
+      light: []
     }
   }
 
@@ -82,7 +74,7 @@ export class PlantAddComponent {
       name: ['', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(20)
+        Validators.maxLength(40)
       ]],
       latinName: ['', [
         Validators.required,
@@ -124,6 +116,7 @@ export class PlantAddComponent {
   createPlant() {
     console.log(this.newPlantForm.value);
     console.log(this.newPlantForm.valid);
+
     this.newPlant = this.newPlantForm.value;
     this.plantService.create(this.newPlant);
     this.hide();
@@ -131,8 +124,6 @@ export class PlantAddComponent {
   }
 
   reset() {
-    this.selectedLights = [];
-
     this.newPlant = {
       name: '',
       latinName: '',
@@ -143,26 +134,5 @@ export class PlantAddComponent {
 
   hide() {
     this.onHide.emit();
-  }
-
-
-  focused: string;
-
-  private onTouch: Function;
-
-
-
-
-
-
-  updateLight(light: string) {
-    if (this.selectedLights.includes(light)) {
-      this.selectedLights = this.selectedLights.filter((x: string) => light !== x);
-    } else {
-      this.selectedLights = this.selectedLights.concat(light);
-    }
-    
-    this.newPlant.light = this.selectedLights;
-    console.log(this.selectedLights);
   }
 }

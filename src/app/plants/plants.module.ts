@@ -8,6 +8,7 @@ import { PlantService } from './plant.service';
 
 import { PlantsComponent } from './plants.component';
 import { PlantAddComponent } from './plant-add/plant-add.component';
+import { PlantLightsComponent } from './plant-add/plant-lights/plant-lights.component';
 import { PlantDetailComponent } from './plant-detail/plant-detail.component';
 
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -23,6 +24,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     PlantsComponent,
     PlantAddComponent,
     PlantDetailComponent,
+    PlantLightsComponent
   ],
   providers: [PlantService],
 })

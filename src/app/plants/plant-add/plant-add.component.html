@@ -17,41 +17,13 @@
         </option>
       </select>
     </div>
-    <br>
-    <br>
+    <br><br>
 
-    <div>
-      <label class="label column">Light</label>
-      <!-- <select multiple formControlName="light" required>
-        <option *ngFor="let light of lights" [value]="light.value">
-          {{light.value}}
-        </option>
-      </select> -->
-      <div class="form-group">
-        <label *ngFor="let light of lights"
-          class="plant-light label column"
-          [class.plant-light--active]="selectedLights.includes(light)">
-          
-          <input formControlName="light"
-            [attr.name]="light.name"  
-            type="checkbox"            
-            [value]="light.value"
-            (change)="updateLight(light)"
-            [checked]="selectedLights.includes(light)">
-            
-          <span class="plant-light__icon plant-light__icon--{{ light.icon }}"></span>
-          {{ light.value | titlecase }}
-        </label>
-      </div>
+    <label class="label">Light</label>
+    <plant-lights formControlName="light">
+    </plant-lights>
 
-
-
-
-
-    </div>
   </div>
-
-
   <br>
 
 
