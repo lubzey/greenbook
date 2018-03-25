@@ -47,7 +47,7 @@ export class PlantLightsComponent implements ControlValueAccessor {
     private onModelChange: Function;
 
     lightIcon(key) {
-        return this.lightValues.filter(x => x.key == key)[0].value;
+        return this.lightValues.find(x => x.key == key).value;
     }
 
     registerOnChange(fn) {
