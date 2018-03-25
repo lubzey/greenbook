@@ -23,6 +23,7 @@ export class PlantAddComponent {
 
   private layers = [
     { value: 'Tree', display: 'Tree' },
+    { value: 'Tree/Shrub', display: 'Tree/Shrub' },
     { value: 'Shrub', display: 'Shrub' },    
     { value: 'Vine', display: 'Vine' },
     { value: 'Herb', display: 'Herb' },
@@ -124,12 +125,7 @@ export class PlantAddComponent {
   }
 
   reset() {
-    this.newPlant = {
-      name: '',
-      latinName: '',
-      layer: '',
-      hearts: 0
-    }
+    this.createForm();
   }
 
   hide() {

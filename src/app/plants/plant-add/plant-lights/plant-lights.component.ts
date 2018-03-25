@@ -21,7 +21,6 @@ const PLANT_LIGHTS_ACCESSOR = {
           type="checkbox"
           [attr.name]="light.name"
           [value]="light"
-          (blur)="onBlur(light)"
           (change)="updateLight(light)"
           [checked]="value.includes(light)">
       
@@ -69,6 +68,5 @@ export class PlantLightsComponent implements ControlValueAccessor {
             this.value = this.value.concat([light]);
         }
         this.onModelChange(this.value);
-        console.log(this.value);
     }
 }
