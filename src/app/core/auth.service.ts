@@ -131,7 +131,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email || null,
       displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || 'https://goo.gl/Fz9nrQ',
+      photoURL: user.photoURL || '/assets/user/farmer-male.png',
     };
     return userRef.set(data, { merge: true });
   }
