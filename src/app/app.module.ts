@@ -15,7 +15,6 @@ import { SharedModule } from './shared/shared.module';
 
 // Feature Modules
 import { PlantsModule } from './plants/plants.module';
-import { UploadModule } from './uploads/shared/upload.module';
 import { UiModule } from './+ui/shared/ui.module';
 ///// End GreenLovers
 

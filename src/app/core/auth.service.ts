@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import * as firebase from 'firebase/app';
+import { auth } from 'firebase';
+import { firebase } from '@firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { NotifyService } from './notify.service';
 
-import { Observable } from 'rxjs/Observable';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { switchMap, startWith, tap, filter } from 'rxjs/operators';
 
 interface User {
   uid: string;
@@ -18,101 +19,105 @@ interface User {
 
 @Injectable()
 export class AuthService {
-
   user: Observable<User | null>;
 
-  constructor(private afAuth: AngularFireAuth,
-              private afs: AngularFirestore,
-              private router: Router,
-              private notify: NotifyService) {
-    this.user = this.afAuth.authState
-      .switchMap((user) => {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private router: Router,
+    private notify: NotifyService
+  ) {
+    this.user = this.afAuth.authState.pipe(
+      switchMap(user => {
         if (user) {
           return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
         } else {
-          return Observable.of(null);
+          return of(null);
         }
-      });
+      })
+      // tap(user => localStorage.setItem('user', JSON.stringify(user))),
+      // startWith(JSON.parse(localStorage.getItem('user')))
+    );
   }
 
   ////// OAuth Methods /////
-
   googleLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
 
   githubLogin() {
-    const provider = new firebase.auth.GithubAuthProvider();
+    const provider = new auth.GithubAuthProvider();
     return this.oAuthLogin(provider);
   }
 
   facebookLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider();    
+    const provider = new auth.FacebookAuthProvider();
     return this.oAuthLogin(provider);
   }
 
   twitterLogin() {
-    const provider = new firebase.auth.TwitterAuthProvider();
+    const provider = new auth.TwitterAuthProvider();
     return this.oAuthLogin(provider);
   }
 
-  private oAuthLogin(provider: firebase.auth.AuthProvider) {
-    return this.afAuth.auth.signInWithPopup(provider)
-      .then((credential) => {
+  private oAuthLogin(provider: any) {
+    return this.afAuth.auth
+      .signInWithPopup(provider)
+      .then(credential => {
         this.notify.update('Welcome to GreenLovers!!!', 'success');
         return this.updateUserData(credential.user);
       })
-      .catch((error) => this.handleError(error) );
+      .catch(error => this.handleError(error));
   }
 
   //// Anonymous Auth ////
-
   anonymousLogin() {
-    return this.afAuth.auth.signInAnonymously()
-      .then((user) => {
+    return this.afAuth.auth
+      .signInAnonymously()
+      .then(credential => {
         this.notify.update('Welcome to GreenLovers!!!', 'success');
-        return this.updateUserData(user); // if using firestore
+        return this.updateUserData(credential.user); // if using firestore
       })
-      .catch((error) => {
-        console.error(error.code);
-        console.error(error.message);
+      .catch(error => {
         this.handleError(error);
       });
   }
 
   //// Email/Password Auth ////
-
   emailSignUp(email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.notify.update('Welcome to GreenLovers!!!', 'success');
-        return this.updateUserData(user); // if using firestore
+    return this.afAuth.auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(credential => {
+        this.notify.update('Welcome new user!', 'success');
+        return this.updateUserData(credential.user); // if using firestore
       })
-      .catch((error) => this.handleError(error) );
+      .catch(error => this.handleError(error));
   }
 
   emailLogin(email: string, password: string) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        this.notify.update('Welcome to GreenLovers!!!', 'success')
-        return this.updateUserData(user); // if using firestore
+    return this.afAuth.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(credential => {
+        this.notify.update('Welcome back!', 'success');
+        return this.updateUserData(credential.user);
       })
-      .catch((error) => this.handleError(error) );
+      .catch(error => this.handleError(error));
   }
 
   // Sends email allowing user to reset password
-  resetPassword(email: string) {
-    const fbAuth = firebase.auth();
+  // resetPassword(email: string) {
+  //   const fbAuth = firebase.auth();
 
-    return fbAuth.sendPasswordResetEmail(email)
-      .then(() => this.notify.update('Password update email sent', 'info'))
-      .catch((error) => this.handleError(error));
-  }
+  //   return fbAuth
+  //     .sendPasswordResetEmail(email)
+  //     .then(() => this.notify.update('Password update email sent', 'info'))
+  //     .catch(error => this.handleError(error));
+  // }
 
   signOut() {
     this.afAuth.auth.signOut().then(() => {
-        this.router.navigate(['/']);
+      this.router.navigate(['/']);
     });
   }
 
@@ -124,15 +129,16 @@ export class AuthService {
 
   // Sets user data to firestore after succesful login
   private updateUserData(user: User) {
-
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${user.uid}`
+    );
 
     const data: User = {
       uid: user.uid,
       email: user.email || null,
-      displayName: user.displayName || 'nameless user',
-      photoURL: user.photoURL || '/assets/user/farmer-male.png',
+      displayName: user.displayName || 'nameless gardener',
+      photoURL: user.photoURL || '/assets/user/farmer-male.png'
     };
-    return userRef.set(data, { merge: true });
+    return userRef.set(data);
   }
 }

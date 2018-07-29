@@ -30,7 +30,7 @@ export class PlantService {
 
   getSnapshot(): Observable<Plant[]> {
     // ['added', 'modified', 'removed']
-    return this.plantsCollection.snapshotChanges().map((actions) => {
+    return this.plantsCollection.snapshotChanges().pipe(map((actions) => {
       return actions.map((a) => {
         const data = a.payload.doc.data() as Plant;
         return { 
@@ -47,7 +47,7 @@ export class PlantService {
           edible: data.edible,
           light: data.light };
       });
-    });
+    }));
   }
 
   getPlant(id: string) {

@@ -1,5 +1,6 @@
 <h2>New plant</h2>
 <form [formGroup]="newPlantForm" (ngSubmit)="createPlant()" novalidate>
+  
   <div class="form-group">
     <label class="label">Common name
       <input class="form-control input" formControlName="name" required>
@@ -25,8 +26,6 @@
 
   </div>
   <br>
-
-
 
   <div style="margin-bottom: 1em" class="columns">
     <div class="column is-one-fifth">

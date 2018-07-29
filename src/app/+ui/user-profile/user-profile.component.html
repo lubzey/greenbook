@@ -1,6 +1,6 @@
-<div class="box" >
+<div class="box">
   <div *ngIf="auth.user | async; then authenticated else guest">
-          <!-- template will replace this div -->
+    <!-- template will replace this div -->
   </div>
 </div>
 
@@ -16,7 +16,19 @@
   <div *ngIf="auth.user | async as user">
     <h3>Howdy, {{ user.displayName }}</h3>
     <img class="card-img-top" [src]="user.photoURL || '/assets/images/doge.png'" width=50px>
-    <p class="text-truncate">UID: {{ user.uid }}</p>
-    <button class="button" (click)="logout()">Logout</button>
+    <!-- <p class="text-truncate">UID: {{ user.uid }}</p>
+    <button class="button" (click)="logout()">Logout</button> -->
+
+
+
+    <h4>Collections</h4>
+      <h5>Owned</h5>
+      <h5>Shared</h5>
+      <h5>Wanted</h5>
   </div>
+
+  
+
+
+
 </ng-template>

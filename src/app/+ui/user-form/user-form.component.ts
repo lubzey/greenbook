@@ -51,10 +51,10 @@ export class UserFormComponent implements OnInit {
     this.auth.emailLogin(this.userForm.value['email'], this.userForm.value['password']);
   }
 
-  resetPassword() {
-    this.auth.resetPassword(this.userForm.value['email'])
-      .then(() => this.passReset = true);
-  }
+  // resetPassword() {
+  //   this.auth.resetPassword(this.userForm.value['email'])
+  //     .then(() => this.passReset = true);
+  // }
 
   buildForm() {
     this.userForm = this.fb.group({

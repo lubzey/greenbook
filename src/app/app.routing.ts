@@ -11,9 +11,7 @@ import { CoreModule } from './core/core.module';
 const routes: Routes = [
   { path: '', component: ReadmePageComponent },
   { path: 'login', component: UserLoginComponent },
-  { path: 'plants', component: PlantsComponent,  canActivate: [AuthGuard] },
-  // uploads are lazy loaded
-  { path: 'uploads', loadChildren: './uploads/shared/upload.module#UploadModule', canActivate: [AuthGuard] },
+  { path: 'plants', component: PlantsComponent,  canActivate: [AuthGuard] }
 ];
 
 @NgModule({
